@@ -1,0 +1,1 @@
+* just normal docker postgres database setup
