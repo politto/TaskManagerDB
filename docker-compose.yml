@@ -1,0 +1,19 @@
+#version: '3.8'
+services:
+  db:
+    image: postgres:latest  # Using latest PostgreSQL image
+    restart: always  # Restart policy: always restart on failure or Docker daemon restart
+    environment:
+      POSTGRES_DB: mydatabase  
+      POSTGRES_USER: postgres  
+      POSTGRES_PASSWORD: postgres  
+    ports:
+      - '3333:5432'  
+    volumes:
+      - db-data:/var/lib/postgresql/data  # Mount a volume for PostgreSQL data persistence
+      - ./database_scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      
+
+volumes:
+  db-data:  # Define a named volume for data persistence
+    driver: local  # Use local volume driver
